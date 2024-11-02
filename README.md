@@ -42,7 +42,11 @@ chmod +x patched_testseal
 
 - And replace the pattern by a shellcode that will xor all registers (and fill the rest with NOPs for padding)
 
+![Screenshot_2024-11-02-23-56-26_1920x1080](https://github.com/user-attachments/assets/763ee5ff-5b0f-4215-8b6c-c2ec1c989a1e)
+
 *(I will flag glibc / musl function pattern when it will be released (maybe in v2.41 for GLIBC))*
+
+https://github.com/user-attachments/assets/fe095432-9355-47a2-ad77-a796c58cec08
 
 ## Kernelmod Method :
 ```bash

@@ -1,16 +1,22 @@
 # Unseal (patch) mseal syscall
 
 ## Usermod Method :
-*My usermod code is disgusting be kind.*
+*The Usermod code is disgusting be kind.*
 *Everything has been coded in 3 hours so its still experimental*
 
-### Runtime :
+```bash
+cd um_method
+
+make
+```
+
+### Runtime way :
 ```bash
 # Will start it in a child process and patch it.
-./unseal ./tests/testseal
+./runtime_unseal ./tests/testseal
 
 # Will attach the Pid and 'try' to patch the seal.
-sudo ./unseal $(pidof loop)
+sudo ./runtime_unseal $(pidof loop)
 ```
 
 - If set using PID, it will detect if it has been already sealed.
@@ -18,16 +24,36 @@ sudo ./unseal $(pidof loop)
 
 https://github.com/user-attachments/assets/3cf9f33b-8d53-4e08-bdec-693722ff1559
 
-### Static :
-*to be continued*
-(will certainly be accurate pattern scanning on glibc / musl function and syscall)
+### Static way :
+```bash
+./static_unseal ./tests/testseal
+
+# Set execution perm to the patched elf
+chmod +x patched_testseal 
+
+# Execute it with mseal patched
+./patched_testseal 
+```
+
+- Will scan mseal syscall pattern with my own scanner imp
+```c
+"48 c7 c0 ce 01 00 00 48|4c 89 ?? 48|4c 89 ?? 48|4c 89 ?? 0f 05"
+```
+
+- And replace the pattern by a shellcode that will xor all registers (and fill the rest with NOPs for padding)
+
+*(I will flag glibc / musl function pattern when it will be released (maybe in v2.41 for GLIBC))*
 
 ## Kernelmod Method :
 ```bash
+cd km_method
+
+make
+
 # Load driver
 sudo insmod target/driver.ko
 
-./usermod $(pidof loop)
+./unseal $(pidof loop)
 
 # Remove driver
 sudo rmmod driver
@@ -38,7 +64,6 @@ sudo rmmod driver
 - If sealed, removes the seal flag using vm_flags_clear.
 
 https://github.com/user-attachments/assets/03b3e844-bab4-4b35-9174-5e74cb8edc83
-
 
 
 

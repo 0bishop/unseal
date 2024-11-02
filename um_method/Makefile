@@ -1,11 +1,15 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -O3 -flto -fomit-frame-pointer -msse -msse2 -msse3 -mmmx -m3dnow
 
-TARGET = unseal
+TARGET = runtime_unseal
+TARGET_1 = static_unseal
 
-all: $(TARGET) tests
+all: $(TARGET) $(TARGET_1) tests
 
-$(TARGET): unseal.c
+$(TARGET): runtime/unseal.c
+	$(CC) $(CFLAGS) -o $@ $<
+
+$(TARGET_1): static/unseal.c
 	$(CC) $(CFLAGS) -o $@ $<
 
 tests:
@@ -13,8 +17,8 @@ tests:
 	$(CC) $(CFLAGS) -o tests/testseal tests/test.c
 
 clean:
-	rm -f $(TARGET)
-	rm -f tests/testseal tests/loop
+	rm -f $(TARGET) $(TARGET_1)
+	rm -f tests/testseal tests/loop patched_*
 	rm -f *.o
 
 .PHONY: all clean tests

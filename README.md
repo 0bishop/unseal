@@ -1,6 +1,8 @@
 # Unseal (patch) mseal syscall
 
 ## Usermod Method :
+*My usermod code is disgusting be kind.*
+*Everything has been coded in 3 hours so its still experimental*
 
 ### Runtime :
 ```bash

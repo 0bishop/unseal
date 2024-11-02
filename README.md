@@ -14,9 +14,7 @@ sudo ./unseal $(pidof loop)
 - If set using PID, it will detect if it has been already sealed.
 - For the patch, it will just place NOPs, xor registers, execute and restore the syscall.
 
-<video width="100%" controls>
-  <source src="assets/2024-11-02-17-57-54.mp4" type="video/mp4">
-</video>
+https://github.com/user-attachments/assets/3cf9f33b-8d53-4e08-bdec-693722ff1559
 
 ### Static :
 *to be continued*
@@ -37,9 +35,10 @@ sudo rmmod driver
 - Checks if the VMA has the VM_SEALED flag.
 - If sealed, removes the seal flag using vm_flags_clear.
 
-<video width="100%" controls>
-  <source src="assets/2024-11-02-17-54-06.mp4" type="video/mp4">
-</video>
+https://github.com/user-attachments/assets/03b3e844-bab4-4b35-9174-5e74cb8edc83
+
+
+
 
 ## Ressources :
 - https://elixir.bootlin.com/linux/v6.11/source/mm/mseal.c

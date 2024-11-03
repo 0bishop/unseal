@@ -1,4 +1,5 @@
 # Unseal (patch) mseal syscall
+- You need at least the version 6.10 of the kernel
 
 ## Usermod Method :
 *The Usermod code is disgusting be kind.*
